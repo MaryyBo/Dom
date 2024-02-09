@@ -1,35 +1,37 @@
+
+const form = document.getElementById('name-form');
+
+form.addEventListener('submit',consoleForm);
+
+function consoleForm (event) { 
+    event.preventDefault();// не роби так, як ти робиш зазвичай! В даному випадку не перезавантажуй сторінку після відправки даних, що ми побачили що в консолі!
+
+    const form = event.target;
+    console.dir(event.target);
+
+    const value = form[0].value;
+    console.log(value); // має власитивість value з іменем або даними, які ввели "dddd"
+}
+
 /* ЗАДАЧА
-    При навееденні на кнопку "Ні" потрібно її приховати (display: none)
-*/
 
+Створити форму в HTML
+В формі запитувати ім'я користувача
 
-// 1. Cпочатку кнопку треба знайти вводимо document і створюємо змінну
-const noBtn = document.getElementById('no-btn');
+При відправленні форми - привітайте користувача ("привіт ім'я користувача")
+Ім'я користувача візьміть з інпуту форми
 
-// const noBtn = $('#no-btn')
+*/ 
 
-// 2. Зробити обробник події
+const formName = document.getElementById('name-user');
 
-function hideBtn (event) { // в event буде target
-   
-    console.log(event.target);
-    const btn = event.target; // кнопка на якій спрацювала подія
-    btn.style.display = 'none';
-    // console.log('test');
+formName.addEventListener('submit', consoleFormName);
 
-    // event.target.removeEventListener('mouseenter', hideBtn);
-    
-} //  Якщо потрібно , щоб кнопка була одноразовою
+function consoleFormName(event) {
+  event.preventDefault();
 
-noBtn.addEventListener('mouseenter', hideBtn);
-
-/* 
-
-За правилом хорошого тону, при скриванні кнопку як в даному випадку, 
-краще так не робити, тому що addEventListener всеодно існує, і нам
-краще видалити цей addEventListener саме це і робить метод 
-
-- .removeEventListener (type, listener)
-
-*/
+  const formName = event.target;
+  const value = formName[0].value;
+  console.log(`Привіт ${value}` );
+}
 
