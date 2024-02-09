@@ -1,16 +1,16 @@
+function getAlert (event){
+    // console.log(event);
+    const btn = event.target; // ми заходимо в об'єкт event і дістаємо target
+   
 
-/*  ЗАДАЧА
-
-    1.зробити кнопку, додати їй ID 
-    2.Напишіть функцію , яка виводить в консоль "привіт"
-    3.Навісити обробку події наведення миші на цю кнопку
-
-*/
-
-function consoleHello () {
-    console.log('привіт');
+    if (btn.style.backgroundColor === 'red') {
+        btn.style.backgroundColor = 'unset';
+    } else {
+        btn.style.backgroundColor = 'red'
+    }
 }
 
-const newBtn = document.getElementById('button'); //у змінній ми зберігаємо посилання на нашу кнопку
+const buttonElement = document.getElementById('btn');
+// console.log(buttonElement);
 
-newBtn.addEventListener('mouseover',consoleHello);
+buttonElement.addEventListener('click',getAlert);
