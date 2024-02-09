@@ -1,38 +1,35 @@
-const collection = document.getElementsByClassName('paragraph');
 
-// for (let i= 0; i< collection.length; i++) {
-//     collection[i].style.color = 'green';
-// }
 
-// АБО через  for...of - перебирає об'єкт по ключам
+//document.querySelector - повертає 1 єдиний перший знайдений елемент(в якості селектору може бути БУДЬ_ЯКИЙ селектор)
 
-for( let p of collection) { //  p це - paragraph, нова змінна коротка р
-    p.style.color = 'green'
+const btn1 = document.querySelector('button'); // по тегу
+
+// console.log(btn1);
+
+const btn2 = document.querySelector('.super-btn') // через крапку,бо це .клас
+ 
+// console.log(btn2);
+
+const btn3 = document.querySelector('#btnbtn'); //по #ID
+
+// console.log(btn3);
+
+
+// document.querySelectorAll
+
+const btnCollection = document.querySelectorAll('button'); // повертає Nodelist
+
+// console.log(btnCollection);
+
+// Динамічні Nodelist - якщо ми з поверненого нам масиву  щось удалимо, то і в верстці теж удалиться 
+// Статичні Nodelist - можно з поверненим масивом робити що завгодно
+
+
+const paragraphCollection = document.querySelectorAll('.paragraph:nth-child(even)');
+
+for (let p of paragraphCollection) {
+    p.style.color = 'red';
+    p.style.backgroundColor = 'yellow';
 }
 
-
-const btns = document.getElementsByTagName('button');
-
-// const arr = [...btns]; // розпиляємо...
-// // console.log(arr); // можна створити повноцінний масив методом Array.from або через spread оператор...
-
-// arr.forEach((button) => {
-//     button.style.color = 'red';
-// }) 
-// Але не обов'язково перетворювати на реальний масив
-
-for( let button of btns) { 
-    button.style.color = 'red'
-} // зробили кнопки червоними через цикл 
-
-
-function hello (event) {
-    console.log('Hello user'); 
-    event.target.removeEventListener('click', hello);//removeEventListener - для того, щоб відписати від події click! На кнопку можна натиснути тільки 1 раз!
-}
-
-// коли кнопок НЕ 1, а 3 треба пройтись ЦИКЛОМ! щоб якось їх змінити 
-
-for (let btn of btns) { // Запускається цикл на коллекції btns - колекція кнопок їх 3
-    btn.addEventListener('click', hello); // let btn - це просто нова змінна, можна назвати як завгодно
-}
+console.log(paragraphCollection);
