@@ -1,37 +1,38 @@
+const collection = document.getElementsByClassName('paragraph');
 
-const form = document.getElementById('name-form');
+// for (let i= 0; i< collection.length; i++) {
+//     collection[i].style.color = 'green';
+// }
 
-form.addEventListener('submit',consoleForm);
+// АБО через  for...of - перебирає об'єкт по ключам
 
-function consoleForm (event) { 
-    event.preventDefault();// не роби так, як ти робиш зазвичай! В даному випадку не перезавантажуй сторінку після відправки даних, що ми побачили що в консолі!
-
-    const form = event.target;
-    console.dir(event.target);
-
-    const value = form[0].value;
-    console.log(value); // має власитивість value з іменем або даними, які ввели "dddd"
+for( let p of collection) { //  p це - paragraph, нова змінна коротка р
+    p.style.color = 'green'
 }
 
-/* ЗАДАЧА
 
-Створити форму в HTML
-В формі запитувати ім'я користувача
+const btns = document.getElementsByTagName('button');
 
-При відправленні форми - привітайте користувача ("привіт ім'я користувача")
-Ім'я користувача візьміть з інпуту форми
+// const arr = [...btns]; // розпиляємо...
+// // console.log(arr); // можна створити повноцінний масив методом Array.from або через spread оператор...
 
-*/ 
+// arr.forEach((button) => {
+//     button.style.color = 'red';
+// }) 
+// Але не обов'язково перетворювати на реальний масив
 
-const formName = document.getElementById('name-user');
+for( let button of btns) { 
+    button.style.color = 'red'
+} // зробили кнопки червоними через цикл 
 
-formName.addEventListener('submit', consoleFormName);
 
-function consoleFormName(event) {
-  event.preventDefault();
-
-  const formName = event.target;
-  const value = formName[0].value;
-  console.log(`Привіт ${value}` );
+function hello (event) {
+    console.log('Hello user'); 
+    event.target.removeEventListener('click', hello);//removeEventListener - для того, щоб відписати від події click! На кнопку можна натиснути тільки 1 раз!
 }
 
+// коли кнопок НЕ 1, а 3 треба пройтись ЦИКЛОМ! щоб якось їх змінити 
+
+for (let btn of btns) { // Запускається цикл на коллекції btns - колекція кнопок їх 3
+    btn.addEventListener('click', hello); // let btn - це просто нова змінна, можна назвати як завгодно
+}
