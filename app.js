@@ -32,4 +32,11 @@ for (let p of paragraphCollection) {
     p.style.backgroundColor = 'yellow';
 }
 
-console.log(paragraphCollection);
+// console.log(paragraphCollection);
+
+
+
+// В DOM є методи , для зміни тексту елементу (рекомендовані, та нерекомендовані)
+
+
+paragraphCollection[0].innerHTML = 'test';
