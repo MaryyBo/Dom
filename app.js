@@ -1,42 +1,62 @@
+/* ЗАДАЧА : створити конвертер валют
 
+Декомпозиція:
 
-//document.querySelector - повертає 1 єдиний перший знайдений елемент(в якості селектору може бути БУДЬ_ЯКИЙ селектор)
+1. HTML сторінка з формою що містить 2 поля вводу:
+- одне поле - введення суми в одній валюті
+- інше поле - вибір валюти в яку ми будемо цю сумму конвертувати
 
-const btn1 = document.querySelector('button'); // по тегу
+2. Додати в форму кнопку "Конвертувати"
 
-// console.log(btn1);
+3. Написати функцію (js обробник події відправки форми)
+- отримати значення веденої суми та обробної валюти за допомогою "value"
+- обчислити конвертовану суму, помноживши введену користувачем суму на курс обміну вибраної користувачем валюти
+- вивести результат (десь на сторінці) для відображення результат (innerHTML)
 
-const btn2 = document.querySelector('.super-btn') // через крапку,бо це .клас
- 
-// console.log(btn2);
+4.Підписати форму на подію "submit", в якості listener використати функцію з пункту 3
 
-const btn3 = document.querySelector('#btnbtn'); //по #ID
+*/
 
-// console.log(btn3);
-
-
-// document.querySelectorAll
-
-const btnCollection = document.querySelectorAll('button'); // повертає Nodelist
-
-// console.log(btnCollection);
-
-// Динамічні Nodelist - якщо ми з поверненого нам масиву  щось удалимо, то і в верстці теж удалиться 
-// Статичні Nodelist - можно з поверненим масивом робити що завгодно
-
-
-const paragraphCollection = document.querySelectorAll('.paragraph:nth-child(even)');
-
-for (let p of paragraphCollection) {
-    p.style.color = 'red';
-    p.style.backgroundColor = 'yellow';
+const CURRENCY = { // В об'єкті зберігаємо значення курсу валют
+    USD_TO_UAH: 37.65,
+    EUR_TO_UAH: 40.61
 }
 
-// console.log(paragraphCollection);
+const converterForm = document.querySelector('#currency-converter-form');
 
+converterForm.addEventListener('submit', converHandler);
 
+function converHandler(event) {
+    event.preventDefault();
 
-// В DOM є методи , для зміни тексту елементу (рекомендовані, та нерекомендовані)
+   const amount = Number(document.querySelector('#amount').value); // все, що ми отримаємо з input це рядок, і треба перетворити значення з snput  на number конструктом
+   const currency = document.querySelector('#currency').value;
+   
+   let convertedAmount;
 
+   const {USD_TO_UAH: usdCourse, EUR_TO_UAH: euroCourse} = CURRENCY;
 
-paragraphCollection[0].innerHTML = 'test';
+   switch (currency) {
+    case 'USD': {
+        convertedAmount = amount * usdCourse;
+        break;
+    }
+    case 'EUR': {
+        convertedAmount = amount * euroCourse;
+        break;
+    }
+    default: throw new Error ('Something goes wrong...');
+}
+
+//    if(currency === 'USD' ) {
+//     convertedAmount = amount * usdCourse;
+//    } else if (currency === 'EUR') {
+//     convertedAmount = amount * euroCourse;
+//    } else {
+//     throw new Error ('Something goes wrong...') 
+//    } // помилка не обов'язкова, але можна додати 
+
+   const resultDiv = document.querySelector('#result');
+
+   resultDiv.innerHTML = `${amount} <b>${currency}</b> = ${convertedAmount.toFixed(2)} UAH`
+}
