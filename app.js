@@ -1,32 +1,23 @@
-/*
-1.Маємо div
-2.Дві кнопки: на одній написано "Зроби червоним" на другій - "Зроби зеленим"
-3.За натисненням на кнопку , фоновий колір div з пункту 1 має змінитися на відповідний колір, вказаний на кнопці.
 
+
+/*
+ЗАДАЧА: Створити кнопку , яка змінює тему сайту (HTML)
+Якщо ви натискаєте на цю кнопку , на сайті вмикається темний режим
+(для тегу body встановіть темний колір)
+(для тексту (в темному режимі) втсановіть колір white)
+
+Якщо наискаєте на цю кнопку ще раз, на сайті вимикається темний режим (toggle)
 */
 
-const div = document.querySelector('#box');
 
-// console.log(div.classList);
-// div.classList.remove('bg-color-red')
-// console.log(div.classList); // пустий classList після .remove
+const themeToggleBtn = document.querySelector('#theme-toggle');
 
-const [red, green] = document.querySelectorAll('.btn'); // отримали грубо кажучи масив з двух елементів, 2 кнопки
-// деструктуризуємо
+const body = document.querySelector('body');
+// const body = document.body; // короткий запис, працює лише з тегом body
 
-red.addEventListener('click', redBtnHandler);
-
-function redBtnHandler (event) {
-    // div.style.backgroundColor = 'red';
-    div.classList.toggle('bg-color-red'); // автоматично підключаємо стилі
-
-}
+themeToggleBtn.addEventListener('click', toggleTheme)
 
 
-green.addEventListener('click', greenBtnHandler);
-
-function greenBtnHandler (event) {
-    // div.style.backgroundColor = 'green';
-    div.classList.toggle('bg-color-green');
-
+function toggleTheme (event) {
+    body.classList.toggle('dark-theme');
 }
