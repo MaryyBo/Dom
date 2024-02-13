@@ -1,23 +1,28 @@
 
 
-/*
-ЗАДАЧА: Створити кнопку , яка змінює тему сайту (HTML)
-Якщо ви натискаєте на цю кнопку , на сайті вмикається темний режим
-(для тегу body встановіть темний колір)
-(для тексту (в темному режимі) втсановіть колір white)
 
-Якщо наискаєте на цю кнопку ще раз, на сайті вимикається темний режим (toggle)
-*/
+const button = document.querySelector('button');
+const div = document.querySelector('#root');
 
 
-const themeToggleBtn = document.querySelector('#theme-toggle');
 
-const body = document.querySelector('body');
-// const body = document.body; // короткий запис, працює лише з тегом body
-
-themeToggleBtn.addEventListener('click', toggleTheme)
-
-
-function toggleTheme (event) {
-    body.classList.toggle('dark-theme');
+function eventHandlerButton (event) {
+    console.log('Hi from button handler');
+    
 }
+
+const eventHandlerBody = (event) => {
+    console.log('Hi from body handler');
+    event.stopPropagation();             //  event.stopPropagation();  далі нічого не піде, кнопка зупиниться на body
+    // console.dir(event.currentTarget);
+    console.log(this);
+    
+    // в середині Function Declaration та Function Expression - this буде --> body
+    // коли ж ми кажемо за Arrow Function, то в неї немає this, і this буде --> Window
+}
+
+button.addEventListener('click', eventHandlerButton, {capture: true});
+// div.addEventListener('click', eventHandler, {capture: true});
+document.body.addEventListener('click', eventHandlerBody, {capture: true});
+// window.addEventListener('click', eventHandler,{capture: true});
+
