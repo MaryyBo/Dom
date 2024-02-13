@@ -1,20 +1,32 @@
-//https://png.pngtree.com/thumb_back/fw800/background/20230610/pngtree-picture-of-a-blue-bird-on-a-black-background-image_2937385.jpg
-//https://img.freepik.com/free-photo/bright-petals-gift-love-in-a-bouquet-generated-by-ai_188544-13370.jpg?size=626&ext=jpg&ga=GA1.1.1141335507.1707696000&semt=ais
+ 
 
 
-const [btn1, btn2] = document.querySelectorAll('button');
+ function createDiv () {
+    const div = document.createElement('div');// створюємо елемент у пам'яті
+    div.classList.add('box') //  підєднали клас .box зі стилів
+    div.append('Hello world'); // приєднуємо текстовий вузол
+    console.log(div);
+    
+     document.body.append(div); // динамічно додали до HTML
+ }
 
-btn1.addEventListener('click',clickHandler);
-btn2.addEventListener('click',clickHandler);
+ /* 
+ <body> 
+ <div class ="box"> Helloworld </div>
+  </body> 
+ */
 
+ const btn = document.querySelector('button');
 
-function clickHandler ({target}) {
- const img = target.parentNode.children[0];
- img.setAttribute ('src', target.dataset.src);
+ btn.addEventListener('click',createDiv );
+  
+ // element.append 
+ // document.createElement
+ // classList.add
 
-
-}
-
-//Метод  setAttribute передаємо 2 значення (name, value)
-// Треба достукатись до адреси картинки
-
+ // ЗАДАЧА додому 
+ /*Спробуйте створити декілька HTML елементів через JS. (document.createElement)
+Спробуйте додати якісь стильові класи цим елементам. (element.classlist.add)
+Спробуйте додати якийсь текстовий вузол для елементів. (  element.append('text....')  )
+Причепіть створені елементи до body (  document.body.append(element)  )
+*/
