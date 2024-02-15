@@ -7,8 +7,13 @@
 */
 //https://www.poznavayka.org/wp-content/uploads/2017/07/Krasnyiy-volk.jpg
 
-function createDiv () {
-    
+
+
+const divWrapper = document.createElement('div'); // створюємо флекс-контейнер для дівів
+divWrapper.classList.add('div-wrapper'); // підключаємо стильовий клас до флекс-контейнера
+document.body.append(divWrapper); // приєднуємо флекс контейнер для дівів до body
+
+function createDiv () {    
     const divElement = document.createElement('div');
     divElement.classList.add('div-class');
 
@@ -41,7 +46,7 @@ function createDiv () {
 
     console.log(divElement);
 
-    document.body.append(divElement);
+    divWrapper.append(divElement); // приєднуємо div не до body, а до флекс-контейнера
 }
 
 const btn = document.querySelector('button');
