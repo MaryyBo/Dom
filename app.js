@@ -1,37 +1,47 @@
-
- /*
-
- Дано:
- - секція , на якій треба клацати мишею
- - дів, який має переміститись на точку куди клацнуть
+/* <article class="card-wrapper">
+        <img class="card-image" src="https://img-forum-wt-ru.cdn.gaijin.net/original/3X/a/f/af62d76a2d92797df0711e6a94d319490936f3a1.jpeg" alt="John avatar"/>
+        <h2 class="user-name">John</h2>
+        <p class="description"> Description of John</p>
+        </article>
  */
 
+       
 
- const field = document.querySelector('#game-field');
- const box = document.querySelector('#box');
- console.dir(box);
-
- field.addEventListener('click', clickHandler); // {capture: true} -  обробник події буде запускатися не на фазі сплиття а занурення, для того щоб потім реалізувати логіку- event.stopPropagation()
-
- function clickHandler(event) {
-    // console.log(event); // client X та clientY це місце де клікають мишкою
-    // target- на якому елементі відбулась подія
-    // currentTarget - якому елементу належав обробник події
-
-    // якщо ми натискаємо не на ігрове поле, а на квадратик, то переміщення не буде!
-    // event.stopPropagation();
-
-     if (event.currentTarget === event.target) { // якщо ми натискаємо на ігрове поле то ми маємо отримати переміщення квадратика
-        const {target: {children: {box}}, clientX, clientY} = event;
-// const {children: {box}} = target; // треба витягати значення, а не брати його з глобальної обаласті видимості
+        const sectionRoot = document.querySelector('#root');
 
 
-    box.style.top = `${clientY}px`;
-    box.style.left = `${clientX}px`;
-     }
- }
+        function createUserCard (user) {
+            // 1. Створення  article
+            const article = document.createElement('article');
+            article.classList.add('card-wrapper');
 
-      /*
-       top: 0; - ось y;
-       left: 0; -  ось x;
- */
+            // 2. Створення  img
+            const img = document.createElement('img');
+            img.setAttribute('src', user.profilePicture);
+            img.setAttribute('alt', user.name);
+            img.classList.add('card-image')
+
+            // 3. Створення h2
+            const h2 = document.createElement('h2');
+            h2.append(user.name);
+            h2.classList.add('user-name')
+
+            // 4. Створення параграфу p 
+           const p = document.createElement('p');
+           p.append(user.description);
+           p.classList.add('description')
+
+           // 5. Доєднати до article елементи img, h2, p
+           article.append(img, h2, p);
+
+        //    //6. Приєднати  article до section 
+        //    sectionRoot.append(article);
+                
+        //6. Повертає article
+        return article
+
+        }
+
+        const cardArray = data.map(user => createUserCard (user));
+
+     sectionRoot.append(...cardArray);
