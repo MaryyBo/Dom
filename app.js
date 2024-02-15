@@ -1,53 +1,37 @@
 
- // ЗАДАЧА додому 
- /*Спробуйте створити декілька HTML елементів через JS. (document.createElement)
-Спробуйте додати якісь стильові класи цим елементам. (element.classlist.add)
-Спробуйте додати якийсь текстовий вузол для елементів. (  element.append('text....')  )
-Причепіть створені елементи до body (  document.body.append(element)  )
-*/
-//https://www.poznavayka.org/wp-content/uploads/2017/07/Krasnyiy-volk.jpg
+ /*
+
+ Дано:
+ - секція , на якій треба клацати мишею
+ - дів, який має переміститись на точку куди клацнуть
+ */
 
 
+ const field = document.querySelector('#game-field');
+ const box = document.querySelector('#box');
+ console.dir(box);
 
-const divWrapper = document.createElement('div'); // створюємо флекс-контейнер для дівів
-divWrapper.classList.add('div-wrapper'); // підключаємо стильовий клас до флекс-контейнера
-document.body.append(divWrapper); // приєднуємо флекс контейнер для дівів до body
+ field.addEventListener('click', clickHandler); // {capture: true} -  обробник події буде запускатися не на фазі сплиття а занурення, для того щоб потім реалізувати логіку- event.stopPropagation()
 
-function createDiv () {    
-    const divElement = document.createElement('div');
-    divElement.classList.add('div-class');
+ function clickHandler(event) {
+    // console.log(event); // client X та clientY це місце де клікають мишкою
+    // target- на якому елементі відбулась подія
+    // currentTarget - якому елементу належав обробник події
 
-    const sectionElement = document.createElement('section');
-    sectionElement.classList.add('section-class');
-    divElement.append(sectionElement);
-    
+    // якщо ми натискаємо не на ігрове поле, а на квадратик, то переміщення не буде!
+    // event.stopPropagation();
 
-    const H2Element = document.createElement('h2');
-    H2Element.append('Рудий вовк');
-    sectionElement.append(H2Element);
-
-
-    const H3Element = document.createElement('h3');
-    H3Element.append('Найбільш рідкісна тварина у світі, яка незабаром може зникнути');
-    sectionElement.append(H3Element);
-
-    
-
-    const pElement = document.createElement('p')
-    pElement.append('Живе в Східній частині США. Загрозою для розмноження цього виду стали звичайні фермери. Існувало три види цих тварин, але сьогодні, на жаль, залишився тільки один. Цей вид занесений у Червону книгу. ');
-    divElement.classList.add('p');
-    sectionElement.append(pElement);
+     if (event.currentTarget === event.target) { // якщо ми натискаємо на ігрове поле то ми маємо отримати переміщення квадратика
+        const {target: {children: {box}}, clientX, clientY} = event;
+// const {children: {box}} = target; // треба витягати значення, а не брати його з глобальної обаласті видимості
 
 
-    const imgElement = document.createElement('img')
-    imgElement.src="https://www.poznavayka.org/wp-content/uploads/2017/07/Krasnyiy-volk.jpg";
+    box.style.top = `${clientY}px`;
+    box.style.left = `${clientX}px`;
+     }
+ }
 
-    sectionElement.append(imgElement);
-
-    console.log(divElement);
-
-    divWrapper.append(divElement); // приєднуємо div не до body, а до флекс-контейнера
-}
-
-const btn = document.querySelector('button');
-btn.addEventListener('click', createDiv);
+      /*
+       top: 0; - ось y;
+       left: 0; -  ось x;
+ */
