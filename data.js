@@ -9,12 +9,12 @@ const data = [
         id:2,
         name: 'Josh',
         description: 'Description of Josh',
-        profilePicture: 'https://cs13.pikabu.ru/post_img/2023/10/28/2/1698456437194820220.jpg'
+        profilePicture: 'Xhttps://cs13.pikabu.ru/post_img/2023/10/28/2/1698456437194820220.jpg'
     },{
         id:3,
         name: 'Jane',
         description: 'Description of Jane',
-        profilePicture: 'https://avatars.dzeninfra.ru/get-zen_doc/987771/pub_5d7561510a451800aee1129d_5d75619f3639e600ac3f0c80/scale_1200'
+        profilePicture: 'Xhttps://avatars.dzeninfra.ru/get-zen_doc/987771/pub_5d7561510a451800aee1129d_5d75619f3639e600ac3f0c80/scale_1200'
     },{
         id:4,
         name: 'Iness',
@@ -29,7 +29,7 @@ const data = [
         id:6,
         name: 'Nathan',
         description: 'Description of Nathan',
-        profilePicture: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg'
+        profilePicture: 'Xttps://upload.wikimedia.org/wikipedia/commons/0/0e/Felis_silvestris_silvestris.jpg'
     },{
         id:7,
         name: 'Tracy',

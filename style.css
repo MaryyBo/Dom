@@ -17,8 +17,17 @@
 }
 
 .card-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit; /*наслідується від .image-wrapper*/
     object-fit: cover; /*щоб зберігала якість картинка*/
 }
+
+.image-wrapper {
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: black;
+    /* overflow: hidden; щоб якщо вилазить щось за край */
+}
+
