@@ -1,106 +1,49 @@
-/*<<article class="card-wrapper">
-<div class="image-wrapper">
-<img class="card-image" src="https://img-forum-wt-ru.cdn.gaijin.net/original/3X/a/f/af62d76a2d92797df0711e6a94d319490936f3a1.jpeg" alt="John avatar"/>
-</div>
-<h2 class="user-name">John</h2>
-<p class="description"> Description of John</p>
-</article> -->
+
+/*ДЗ
+1. Зробити інпут для вводу тексту
+2. Зробити кнопку, яка по натисненю, текст з інпута перетворює на елемент списку
+
+<form>
+    <input type="text" />
+    <button>Click to add</button>
+</form>
+
+<ul>
+    <li>Зробити щось одне</li>
+    <li>Зробити щось інше</li>
+</ul>
+
+До кожного li приєднати кнопку, за допомогою якої елемент зі списку можна видалити
 */
 
-        const sectionRoot = document.querySelector('#root');
+
+const buttonToDo = document.querySelector('button');
+buttonToDo.addEventListener('click', addToDoList)
 
 
-        function createUserCard (user) {
+function addToDoList(event) {
+  event.preventDefault();
 
-         //1. Створюємо обгортку для картинки
-        const imgWrapper =  createImageWrapper (user);
+  const input = document.querySelector('#text');
+  const text = input.value;
 
-            // 2. Створення h2
-            const h2 = createElement('h2', {classNames: ['user-name']}, user.name);
+  const li = document.createElement('li');
+  li.innerHTML = text;
 
-            // 3. Створення параграфу p 
-           const p = createElement('p', {classNames: ['description']}, user.description);
-                
-        //4.Cтворюємо і Повертаємо  article в який вкладені елементи img, h2, p
-        return  createElement('article', {classNames: ['card-wrapper']}, imgWrapper, h2, p);
-        }
+  const delButton = document.createElement('button');
+  delButton.addEventListener('click', deleteToDoList);
+  delButton.innerText = 'Delete';
 
-        const cardArray = data.map(user => createUserCard (user));
+  li.append(delButton);
 
-        sectionRoot.append(...cardArray);
+  const ul = document.querySelector('ul');
+  ul.append(li);
 
-     /*Рефакторинг коду  - переробка коду, переписування коду, 
-     щоб спростити його розуміння, при цьому не змінюючи логіку.
-     Кусок коду (100 рядків) наприклад, переписали 5-10 строчок, перевіряємо знову чи все нормально. 
-     Ціль - спростити код. Треба відрізняти і не плутати з Оптимізацією производительности(тут код стає складнішим)
-     */
-
-     /**
-     @param {String} type - тег елемента, який нам треба створити
-     @param {String} classNamdes - список класів, які треба додати до елемента
-     @param {...Node} childNodes - список дочірніх вузлів
-     @returns {HTMLElement}
-     */
-
-     function createElement (type,{classNames}, ...childNodes) {
-      const elem = document.createElement(type);
-      elem.classList.add(...classNames);
-      elem.append(...childNodes);
-
-      return elem;
-     }
-
-     function imgLoadHandler ({target}) {
-      console.log('image succesfully load');
-     const parentWrapper =  document.querySelector(`#wrapper${target.dataset.id}` )
-      parentWrapper.append(target);
-     }
-
-   function imgErrorHandler ({target}) {
-      target.remove();
-      console.log('image loading has error');
-      
-     }
-
-     function createUserImage (user) {
-      const img = document.createElement('img');
-      img.setAttribute('src', user.profilePicture);
-      img.setAttribute('alt', user.name);
-
-      img.dataset.id = user.id;
-
-      img.classList.add('card-image');
-
-      img.addEventListener('load',imgLoadHandler);
-      img.addEventListener('error', imgErrorHandler )
-
-      return img;
-     }
+  input.value = '';// видалити попередньо введений текст з input
+}
 
 
-     function createImageWrapper (user) {
-      //1. Cтворення заглушки
-      const imgWrapper = createElement('div', {classNames: ['image-wrapper']});
-      imgWrapper.setAttribute('id', `wrapper${user.id}`);
-      console.log()
-
-      //2. Визначаємо background колор заглушки з урахуванням імені користувача
-      imgWrapper.style.backgroundColor = stringToColour(user.name);
-         
-      //3. Створення  img
-       const img = createUserImage(user);
-       return imgWrapper;
-     }
-
-    function stringToColour (str) {
-      let hash = 0;
-      str.split('').forEach(char => {
-        hash = char.charCodeAt(0) + ((hash << 5) - hash)
-      })
-      let colour = '#'
-      for (let i = 0; i < 3; i++) {
-        const value = (hash >> (i * 8)) & 0xff
-        colour += value.toString(16).padStart(2, '0')
-      }
-      return colour
-    }
+function deleteToDoList() {
+  const liToDelete = this.parentElement;
+  liToDelete.remove();
+}
