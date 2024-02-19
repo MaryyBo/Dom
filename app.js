@@ -1,80 +1,47 @@
+/*
 
-/*ДЗ
-1. Зробити інпут для вводу тексту
-2. Зробити кнопку, яка по натисненю, текст з інпута перетворює на елемент списку
 
-<form>
-    <input type="text" />
-    <button>Click to add</button>
-</form>
+Регулярні вирази - своєрідний фільтр для текстових даних.
 
-<ul>
-    <li>Зробити щось одне</li>
-    <li>Зробити щось інше</li>
-</ul>
+Регулярні вирази - інструмент порівняння якогось рядка із заданим шаблоном.
 
-До кожного li приєднати кнопку, за допомогою якої елемент зі списку можна видалити
+За допомогою регулярки ми описуємо, як має виглядати рядок, який ми очікуємо від користувача.
+
+
+^ - початок рядка
+$ - кінець рядка
+[] - послідовність символів
+[a-z] - діапазон
+[a-zA-Z] - два діапазони одночасно
+[abcdef] - перерахувати вручну
+
+/^[a-zA-Z]{2,5}/         // шукаємо слово з 2-5 літер (великих чи маленьких)
+/^[a-zA-Z]{2,}[0-9]+$/   // шукаємо слово будь-якої довжини більше двох літер, в кінці має бути мінімум 1 цифра
+/^[a-zA-Z]{2,}[0-9]+\.$/    //  шукаємо слово будь-якої довжини більше двох літер, в кінці має бути мінімум 1 цифра і після цифри має бути точка
 */
 
+//const regexp = /^Test$/;
 
-const buttonToDo = document.querySelector('button');
-buttonToDo.addEventListener('click', addToDoList)
+const str1 = 'hello';
+const str2 = new String('hello');
 
+// Regexp
 
-function addToDoList(event) {
-  event.preventDefault();
+const reg1 = /^[a-zA-Z]{2,5}$/;
+//console.dir(reg1);
 
-   // Отримання значення з інпута
-  const input = document.querySelector('#text');
-  const text = input.value.trim(); //value - це те, що вводять в input - текст
-  console.log(input.value);
+const reg2 = new RegExp('^[a-zA-Z]{2,5}$');
+//console.dir(reg2);
 
-  // Створення нового елементу списку
-  const li = document.createElement('li');
-  li.innerHTML = text;
+// Еспереминтуємо: валідуємо email черех регулярки
 
-  const delButton = document.createElement('button');
-  delButton.addEventListener('click', deleteToDoList);
-  delButton.innerText = 'Delete';
-  delButton.classList.add('remove-btn');
+const testString = 'sunnyday56@gmail.com';
+const emailRegExp = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
 
-  // Додавання кнопки видалення до елементу списку
-  li.append(delButton);
+emailRegExp.exec(testString); // array
+emailRegExp.test(testString); // true
 
-  // Отримання посилання на список і додавання нового елементу
-  const ul = document.querySelector('ul');
-  ul.append(li);
+testString.match(emailRegExp); // array -- спрацює як exec
 
-  input.value = '';// видалити попередньо введений текст з input
-  
-  console.dir(this);
-}
-
-// 1 Variant
-
-// function deleteToDoList() {
-//   // const liToDelete = this.parentElement;
-//   // liToDelete.remove();
-//   this.parentNode.remove();  
-//   console.dir(this); 
-//   // this вказує на кнопку видалення, parentNode вказує на батьківський елемент (<li>)
-// }
-
-// 2 Variant
-
-function deleteToDoList({target: {parentNode}}) {
-  parentNode.remove();
-}
-
-
-
-/* 
-Якщо ви викликаєте console.dir(this) всередині функції addToDoList, ви можете побачити в консолі об'єкт,
- який представляє елемент, на якому відбувається подія, і дізнатися більше про його властивості та методи.
-
-*/
-
-
-
-
-
+let str = 'Blue SKY';
+console.log(str.replace(new RegExp('[A-Z]{3}'), 'test123')); // Blue test123
