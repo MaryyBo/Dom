@@ -1,11 +1,25 @@
+const user = {
+    firstName: 'John',
+    lastName:'Doe',
+    age: 45,
+    footSize: 45
+}
+
+// JSON
+// Весь обєкт JSON передаєтьсяя як один рядок
+// stringify - перетворює JS об'єкт в JSON
+// parse - перетворює  JSON в S об'єкт 
 
 
-// function helloUser () {
-//     alert('Hello user');
-// }
+const jsonString = JSON.stringify(user)
+// '{"firstName":"John","lastName":"Doe","age":45,"footSize":45}
 
-// setTimeout (helloUser, 8000); 
+// і навпаки 
 
+/*JSON.parse(jsonString)
 
-
-const helloTimeoutID = setTimeout (() => alert('Hello user'), 8000) // через стрілкову
+{firstName: 'John', 
+lastName: 'Doe', 
+age: 45, 
+footSize: 45}
+*/
