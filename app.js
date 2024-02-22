@@ -1,54 +1,33 @@
-const user = {
-    firstName: 'John',
-    lastName:'Doe',
-    age: 45,
-    footSize: 45
-}
+// Fetch API - інтерфейс для отримання ресурсів
 
-// JSON
-// Весь обєкт JSON передаєтьсяя як один рядок
-// stringify - перетворює JS об'єкт в JSON
-// parse - перетворює  JSON в S об'єкт 
+// const p = fetch('./user.json'); // p = promise
+
+// const jsonPromise = p.then ((response) => {  // response - це екземляр спец об'єкту, вбудований,  зі своїми властивостями і методами
+//     return response.json(); //Перетворюємо 0 та 1 на JS об'єкт
+// })
+
+// //Записали return response.json(); в окрему змінну const jsonPromise 
+
+// jsonPromise.then ((data) => {
+//     console.log(data);
+// })
 
 
-const jsonString = JSON.stringify(user)
-// '{"firstName":"John","lastName":"Doe","age":45,"footSize":45}
+// Можемо спростити з допомогою chaining
 
-// і навпаки 
+// const p = fetch('./user.json').then ((response) => {  // response - це екземляр спец об'єкту, вбудований,  зі своїми властивостями і методами
+//     return response.json(); 
+// }).then ((data) => {
+//     console.log(data);
+// })
 
-/*JSON.parse(jsonString)
 
-{firstName: 'John', 
-lastName: 'Doe', 
-age: 45, 
-footSize: 45}
-*/
+//https://api.monobank.ua/bank/currency
+//https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5
 
-// Функції в JSON будуть ігноруватись
 
-// Серіалізація - процес перетворення JS об'єктів в JSON - метод stringify
-// Десеріалізація - процес перетворення JSON об'єктів в JS (навпаки) - метод parse
-
-// Поверхневі копії oб'єкту (shallow copy) - копія , де копіюються тільки посилання на елементи , а не самі значення (зміни внесені в оригінальний об'єкт відобразяться в поверхневій копії і навпаки)
-
-const originalObject = {
-    users : [
-        {
-            name: 'John',
-            age: 25,
-        },{
-            name: 'Lucky',
-            age: 33,
-        }
-    ]
-}
-
-// можем створити поверхневу копію  з допомогою спред оператору
-
-const shallowCopy = {...originalObject}
-
-//Глибока копія (deep copy) - створення повноцінної копії, де копіюються як посилання, так і самі значення 
-//Щоб створити глибоку копію, потрібен JSON
-
-const deepCopy = JSON.parse(JSON.stringify(originalObject));
-
+fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5').then ((response) => {  
+    return response.json(); 
+}).then ((data) => {
+    console.log(data);
+})
