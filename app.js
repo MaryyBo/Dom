@@ -9,17 +9,26 @@ function loadImage (src) {
     h2.append('Loading image...') // додаємо текстовий вузол
     document.body.append(h2); // відображаємо поки грузиться картинка смс "Loading image..."
 
+   
+
 
     // 3. Повертаємо promise
     return new Promise ((resolve, reject) => {
+        // 3. Створюємо setTimeout
+      const timeOutId = setTimeout (() => {
+            reject ('Image can`t be loaded')
+        }, 5000)
+
         // Підписуємо свторену картинку на подію load
         // Якщо картина завантажеться  - ми резолвимо проміс з елементом картинки
         img.addEventListener('load', () => {
+            clearTimeout(timeOutId);
             resolve(img);
         })
         // Підписуємо свторену картинку на подію error
         // Якщо картина HE завантажеться  - ми реджектимо з повідомлення про помилку
         img.addEventListener('error', () => {
+            clearTimeout(timeOutId);
             reject('Image can`t be loaded');
         })
     })
