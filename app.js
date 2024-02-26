@@ -41,7 +41,7 @@ function requestAPI(cityName) {
             previousWidgetRemove();// Функція видалення попереднього віджета
 
             displayWeather(data);
-        })
+        })}
         
 
 /*<article class="weather">
@@ -53,30 +53,45 @@ function requestAPI(cityName) {
 
 function displayWeather(weatherObject) {
     const { name, main: { temp }, weather: [{ description }] } = weatherObject;
-    //1.Створємо article
-    const article = document.createElement('article')
-    article.classList.add('weather')
 
-    //2.Створємо параграф з назвою міста
-    const cityName = document.createElement('p');
-    cityName.append(`City name:${name}`);
+    
+    const article = document.querySelector('#weather-box');
+    article.classList.add('weather-display');
+    
+    const city = document.querySelector('#city');
+    city.textContent = name;
 
-    //3.Створємо параграф з температурою
-    const temperature = document.createElement('p');
-    temperature.append(`Temperature:${temp}°C`);
+    const temperature = document.querySelector('#temp');
+    temperature.textContent = `${temp}°C`;
 
-    //4.Створємо параграф з описом погоди
-    const weatherDescription = document.createElement('p');
-    weatherDescription.append(`Weather description: ${description}`);
+    const desc = document.querySelector('#description');
+    desc.textContent = description;
+}
 
-    //5. До article чіпляємо параграфи з пунктів 2-4
-    article.append(cityName, temperature, weatherDescription);
+//     //1.Створємо article
+//     const article = document.createElement('article')
+//     article.classList.add('weather')
 
-    //5. Знаходимо section і чіпляємо до неї article
-    const section = document.querySelector('.wrapper');
+//     //2.Створємо параграф з назвою міста
+//     const cityName = document.createElement('p');
+//     cityName.append(`City name:${name}`);
 
-    section.append(article);
-}}
+//     //3.Створємо параграф з температурою
+//     const temperature = document.createElement('p');
+//     temperature.append(`Temperature:${temp}°C`);
+
+//     //4.Створємо параграф з описом погоди
+//     const weatherDescription = document.createElement('p');
+//     weatherDescription.append(`Weather description: ${description}`);
+
+//     //5. До article чіпляємо параграфи з пунктів 2-4
+//     article.append(cityName, temperature, weatherDescription);
+
+//     //5. Знаходимо section і чіпляємо до неї article
+//     const section = document.querySelector('.wrapper');
+
+//     section.append(article);
+// }
 
 
 function previousWidgetRemove() {

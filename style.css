@@ -18,7 +18,12 @@
 }
 
 .weather {
+    /* display: none; */
     margin-top: 10px;
     padding: 20px;
     border: 2px solid black;
+}
+
+.weather-display {
+    display: block;
 }
