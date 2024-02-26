@@ -38,7 +38,7 @@ function requestAPI(cityName) {
         .then((data) => {
             //3. Відмальовуємо погоду
 
-            clearPreviousWidget();// Функція видалення попереднього віджета
+            previousWidgetRemove();// Функція видалення попереднього віджета
 
             displayWeather(data);
         })
